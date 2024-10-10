@@ -4,7 +4,7 @@ namespace SignalRSample.Hubs
 {
     public class RockPaperScissorHub :Hub
     {
-        public Dictionary<string, int> GetRaceStaus()
+        public Dictionary<string, int> GetRaceStatus()
         {
             return StaticDetails.RockPaperScissorRace;
         }

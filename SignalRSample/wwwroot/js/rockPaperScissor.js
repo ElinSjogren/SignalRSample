@@ -15,7 +15,14 @@ connectionRockPaperScissor.on("updateRockPaperScissor", (voteValue, number) => {
 //start the connection
 function fulfilled() {
     console.log("Connection to Rock'PaperScissor was Sccessful");
-
+    connectionRockPaperScissor.invoke("GetRaceStatus").then(raceListWithCurrentValues => {
+        console.log( raceListWithCurrentValues , typeof(raceListWithCurrentValues) )
+        Object.keys(raceListWithCurrentValues).forEach(key => {
+            var voteSpan = document.getElementById(`${key}Counter`);
+            voteSpan.innerText = raceListWithCurrentValues[key].toString();
+            console.log(raceListWithCurrentValues[key], key);
+        })
+    })
 }
 function rejected() {
 
