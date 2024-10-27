@@ -33,7 +33,7 @@ namespace SignalRSample.Controllers
             await _rockPaperScissor.Clients.All.SendAsync("updateRockPaperScissor", vote, StaticDetails.RockPaperScissorRace[vote]);
 
 
-            return Accepted();
+            return Redirect("/Home");
         }
 
         public IActionResult Privacy()
