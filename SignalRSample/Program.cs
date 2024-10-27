@@ -42,4 +42,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 app.MapHub<UserHub>("/hubs/userCount");
 app.MapHub<RockPaperScissorHub>("/hubs/rockPaperScissor");
+app.MapHub<SubscriptionsHub>("/hubs/subscribe");
 app.Run();
