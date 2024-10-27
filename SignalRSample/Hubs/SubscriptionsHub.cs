@@ -17,7 +17,7 @@ namespace SignalRSample.Hubs
                         subList += subscription.Split(':')[1]+" ";
                     }
                 }
-
+                await Clients.Others.SendAsync("newSubscriberAdded", subscriptionName);
                 await Clients.Caller.SendAsync("SubscriptionGroupStatus", subList, subscriptionName, true);
                 await Groups.AddToGroupAsync(Context.ConnectionId, subscriptionName);
             }
@@ -35,7 +35,7 @@ namespace SignalRSample.Hubs
                         subList += subscription.Split(':')[1] + " ";
                     }
                 }
-
+                await Clients.Others.SendAsync("subscriberRemoved", subscriptionName);
                 await Clients.Caller.SendAsync("SubscriptionGroupStatus", subList, subscriptionName, false);
                 await Groups.RemoveFromGroupAsync(Context.ConnectionId, subscriptionName);
             }

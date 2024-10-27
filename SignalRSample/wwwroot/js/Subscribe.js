@@ -81,11 +81,16 @@ connectionSubscribe.on("SubscriptionGroupStatus", (stringGroupJoined, subscripti
             default:
                 break;
         }
-        toastr.info(`Y'all out of ${subscriptionName}`);
+        toastr.warning(`Y'all out of ${subscriptionName}`);
     }
 });
 
-
+connectionSubscribe.on("newSubscriberAdded", (subscriptionName) => {
+    toastr.info(`Someone just joined ${subscriptionName}`)
+})
+connectionSubscribe.on("subscriberRemoved", (subscriptionName) => {
+    toastr.info(`Someone just un joined ${subscriptionName}`)
+})
 
 //start the connection
 function fulfilled() {
