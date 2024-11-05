@@ -14,29 +14,44 @@ let trigger_scissor = document.getElementById("trigger_scissor");
 
 // event listeners
 btn_rock.addEventListener("click", (e) => {
+    console.log("Rock clicked");
     connectionSubscribe.send("JoinSubscription", "Rock");
     e.preventDefault();
-})
+});
 btn_paper.addEventListener("click", (e) => {
     connectionSubscribe.send("JoinSubscription", "Paper");
     e.preventDefault();
-})
+});
 btn_scissor.addEventListener("click", (e) => {
     connectionSubscribe.send("JoinSubscription", "Scissor");
     e.preventDefault();
-})
+});
 btn_un_rock.addEventListener("click", (e) => {
     connectionSubscribe.send("QuitSubscription", "Rock");
     e.preventDefault();
-})
+});
 btn_un_paper.addEventListener("click", (e) => {
     connectionSubscribe.send("QuitSubscription", "Paper");
     e.preventDefault();
-})
+});
 btn_un_scissor.addEventListener("click", (e) => {
     connectionSubscribe.send("QuitSubscription", "Scissor");
     e.preventDefault();
-})
+});
+
+trigger_rock.addEventListener("click", (e) => {
+    console.log("Rock clicked");
+    connectionSubscribe.send("TriggerNotification", "Rock");
+    e.preventDefault();
+});
+trigger_paper.addEventListener("click", (e) => {
+    connectionSubscribe.send("TriggerNotification", "Paper");
+    e.preventDefault();
+});
+trigger_scissor.addEventListener("click", (e) => {
+    connectionSubscribe.send("TriggerNotification", "Scissor");
+    e.preventDefault();
+});
 
 //create connection at a url location
 var connectionSubscribe = new signalR.HubConnectionBuilder()
@@ -81,20 +96,22 @@ connectionSubscribe.on("SubscriptionGroupStatus", (stringGroupJoined, subscripti
             default:
                 break;
         }
-        toastr.warning(`Y'all out of ${subscriptionName}`);
+        toastr.warning(`Yáll out of ${subscriptionName}`);
     }
 });
-
+connectionSubscribe.on("triggerNotification", (notificatonName) => {
+    toastr.info(`Notifications on ${notificatonName} are launched`)
+});
 connectionSubscribe.on("newSubscriberAdded", (subscriptionName) => {
     toastr.info(`Someone just joined ${subscriptionName}`)
-})
+});
 connectionSubscribe.on("subscriberRemoved", (subscriptionName) => {
     toastr.info(`Someone just un joined ${subscriptionName}`)
-})
+});
 
 //start the connection
 function fulfilled() {
-    console.log("Connection to subscribe was Sccessful");
+    console.log("Connection to subscribe was Successful");
 }
 function rejected() {
 

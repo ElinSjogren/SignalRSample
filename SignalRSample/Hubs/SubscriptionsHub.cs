@@ -40,5 +40,9 @@ namespace SignalRSample.Hubs
                 await Groups.RemoveFromGroupAsync(Context.ConnectionId, subscriptionName);
             }
         }
+        public async Task TriggerNotification(string subscriptionName)
+        {
+            await Clients.Group(subscriptionName).SendAsync("triggerNotification", subscriptionName);
+        }
     }
 }
